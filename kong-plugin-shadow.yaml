@@ -1,0 +1,19 @@
+_format_version: "3.0"
+
+plugins:
+  - name: shadow
+    config:
+      weight: 100
+      shadow_request_body: true
+      shadow_endpoints:
+        - http://echo:8080
+
+
+services:
+  - name: httpbin
+    url: http://httpbin.org/anything
+          
+    routes:
+      - name: httpbin
+        paths:
+          - /

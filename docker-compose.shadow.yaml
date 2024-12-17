@@ -1,0 +1,33 @@
+version: '3.8'
+
+networks:
+  kong-net:
+    driver: bridge
+
+services:
+  kong:
+    image: kong/kong-gateway:3.8.0.0
+    volumes:
+      # Mount the shadow plugin
+      - ./kong-plugin-shadow/kong/plugins/shadow:/usr/local/share/lua/5.1/kong/plugins/shadow
+      - ./kong-plugin-shadow.yaml:/kong.yaml
+    environment:
+      KONG_DATABASE: off
+      KONG_VITALS: off
+      KONG_LUA_SSL_TRUSTED_CERTIFICATE: system
+      KONG_DECLARATIVE_CONFIG: kong.yaml
+      KONG_PLUGINS: bundled,shadow
+
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+    networks:
+      - kong-net
+  
+  echo:
+    image: mendhak/http-https-echo:35
+    ports:
+      - "8080:8080"
+      - "8445:8443"
+    networks:
+      - kong-net
