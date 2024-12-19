@@ -21,6 +21,13 @@ Create a file named `mirror-inject.conf` with the following content:
 location = /mirror {
     internal;
 
+    # Example: Conditional proxying based on the request URI.
+    # Only mirror requests if the request URI starts with /v1.
+    # Uncomment the following lines to enable this feature
+    # if ($request_uri !~ ^/v1) {
+    #     return 204;
+    # }
+
     # Set the upstream to the mirror server
     proxy_pass https://my-mirror-server.com;
 
