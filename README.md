@@ -58,9 +58,11 @@ location = /mirror {
 }
 ```
 
-> **Note:** Ensure this file is placed in the `/usr/local/kong/mirror-inject.conf` directory on the Kong server.
+### Step 2: Mount the mirror configuration file
 
-### Step 2: Start Kong with the mirroring configuration
+Place the `mirror-inject.conf` file in the `/usr/local/kong/mirror-inject.conf` directory on the Kong server.
+
+### Step 3: Start Kong with the mirroring configuration
 Update the Kong configuration to include the mirroring file.
 
 **Using `kong.conf`:**
